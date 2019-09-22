@@ -1,6 +1,3 @@
-Hello
-
-
 Book Rating and Commenting: Orson Meyreles
 
 Done:
