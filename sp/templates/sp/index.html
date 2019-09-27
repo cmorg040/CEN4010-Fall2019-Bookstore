@@ -1,0 +1,29 @@
+<html>
+
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </head>
+    <body>
+        {% if latest_question %}
+        <ul>
+            {% for question in latest_question %}
+                <li><a href='/sp/{{question.id}}'><b>{{question.question_text}}</b></a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <ul class= "container card"><h2>No content. Add Content.. </h2></ul>
+            <li class ="container card">No data. Add some.. </h2></li>
+            <ul class = "container card"><h2>No Values. Add some.. </h2></ul>
+
+        {% endif %}
+
+        
+
+    </body>
+
+
+
+
+
+</html>
