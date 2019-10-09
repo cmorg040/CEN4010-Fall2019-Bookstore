@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ object.bookName }}</title>
+    </head>
+    <body>
+        <h1>{{object.bookName}}</h1>
+        <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <img src = "{{ object.cover.url }}">
+                    </div>
+                    <div class="col-6">
+                        <p>By: {{object.authorName}}</p>
+                        <p>Genre: {{object.genre}}</p>
+                    </div>
+                </div>
+        </div>
+    </body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>

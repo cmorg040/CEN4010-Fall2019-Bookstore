@@ -2,13 +2,15 @@
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>Django GeekText</title>
     </head>
     <body>
     {% if books %}
         <ul>
             {% for book in books %}
            <li><a href = '/books/{{book.id}}'><b>{{book.bookName}}</b></a></li>
+           <p>By: {{ book.authorName }}</p>
+           <img src="{{ book.cover.url }}">
             {% endfor %}
         </ul>
     {% else %}
