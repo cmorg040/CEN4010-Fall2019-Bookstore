@@ -1,0 +1,65 @@
+{% load static %}
+<!-- This is the navbar that every section should get, in every page this should be at the top the header
+      Look at my examples to understand how to use
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Book Store CEN4010!</title>
+
+    <!-- Font Awesome for different fonts-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <!-- We using Bootstrap version 4 core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body class="bg-dark text-white">
+
+    <!--Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top " >
+      {% if user.is_authenticated %}
+        <!--if user is authorized then add this icon next to book meaning user has logged in-->
+        <a class="navbar-brand" href="{% url 'store-home-page' %}"><i class="fas fa-user fa-fw"></i>Book</a>
+      {% else %}
+        <a class="navbar-brand" href="{% url 'store-home-page' %}">Book</a>
+      {% endif %}
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+        aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+          {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+              <a class="nav-item nav-link" href="/admin/"><i class="fas fa-users-cog"></i> Admin</a>
+            {% endif %}
+              <!--add your urls here when finished with section to redirect to your page-->
+              <a class="nav-item nav-link"  href="{% url "settings:profile-settings" %}"><i class="fas fa-cog"></i> Settings</a>
+              <a class="nav-item nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          {% else %}
+            <a class="nav-item nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <!--/.Navbar -->
+
+    <!--The main body of the rest of the pages belong here-->
+    <main role="main" style="margin-right: 30px; margin-left: 30px;">
+      {% block body %} {% endblock %}
+    </main>
+
+    <!--For script-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

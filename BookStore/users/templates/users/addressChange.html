@@ -1,0 +1,41 @@
+<!--Here I got the base from user base because all of these new pages will be directly under the 4 buttons-->
+{% extends "users/partials/_base.html" %}
+{% load crispy_forms_tags %}
+<!-- This will make the form look better, less code. -->
+{% block settingsPageInfo %}
+
+<!-- This page will update the current address when clicked, your old address should display and you can either
+    update it or delete it
+ -->
+<div  class="card bg-dark text-primary">
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-success">Edit Your Address</h3>
+                <hr>
+            </div>
+        </div>
+
+        <!-- Update the current address -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{userAddressForm |crispy}}
+            <div class="form-group">
+                <button class="btn btn-outline-success" type="submit">Save changes</button>
+            </div>
+        </form>
+
+        <!-- Delete the current address -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{DeleteAddressForm |crispy}}
+            <div class="form-group">
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
