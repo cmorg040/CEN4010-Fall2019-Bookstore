@@ -5,19 +5,37 @@
         <title>{{ object.bookName }}</title>
     </head>
     <body>
-        <h1>{{object.bookName}}</h1>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <style>
+                h1 {text-align: center;}
+                h4 {text-align: center;}
+                </style>
+              <h1 class="display-4">{{object.bookName}}</h1>
+              <h4>By: {{object.authorName}}</h4>
+            </div>
+          </div>
         <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <img src = "{{ object.cover.url }}">
-                    </div>
-                    <div class="col-6">
-                        <p>By: {{object.authorName}}</p>
-                        <p>Genre: {{object.genre}}</p>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="media">
+                        <a class="lightbox" href="#dog"><img src="{{ object.cover.url }}" class="align-self-start mr-3" alt="..."></a>
                     </div>
                 </div>
+                <div class="col-sm">
+                    <div class="media-body">
+                        <h5 class="mt-0">Book Summary: </h5>
+                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                        <p><b>Genre:</b> {{object.genre}}</p>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <h5>Price: </h5>
+                </div>
+            </div>
         </div>
     </body>
+    <!-- <link rel="stylesheet" type="text/ css" href="../styles/book_detail.css">  -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </html>
