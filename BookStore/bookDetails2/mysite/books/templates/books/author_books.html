@@ -5,10 +5,10 @@
         <title>{{ view.kwargs.username }}</title>
     </head>
     <body>    
-        <h1 class="mb-3">Posts by {{ view.kwargs.username }}</h1>
+        <h1 class="mb-3">Books by {{ view.kwargs.username }}</h1>
                 <ul>
                 {% for book in books %}
-                    <li><a href="{% url 'author-browsing' book.authorName %}"><b> {{book.bookName}}</b></a></li>
+                    <li><a href="{% url 'author-browsing' book.bookName %}"><b> {{ book.bookName }}</b></a></li>
                     <p>By: {{ book.authorName }} </p>
                     <img src="{{ book.cover.url }}">
                 {% endfor %}
