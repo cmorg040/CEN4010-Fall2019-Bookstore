@@ -48,8 +48,8 @@ class AuthorBookListView(ListView):
     template_name = 'books/author_books.html'
     context_object_name = 'books'
 
-    def get_query_set(self):
-        return Books.objects.filter(authorName__authorName=self)
+    def get_queryset(self):
+        return Books.objects.filter(authorName__authorName=self.kwargs.get('username'))
 
 class BookDetailView(DetailView):
     model = Books

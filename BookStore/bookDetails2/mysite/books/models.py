@@ -12,16 +12,17 @@ class Author(models.Model):
 
 class Books(models.Model):
     bookName = models.CharField(max_length=200)
-    bookSummary = models.TextField
-    # bookComments = models.ManyToManyField(Comment)
+    bookSummary = models.TextField(default='hello')
     bookRating = models.CharField(max_length=1, default='1') # may need to be an int
     # do i need to include book price ? 
+    bookPrice = models.DecimalField(max_digits=10,decimal_places=2, default=2.22)
     genre = models.CharField(max_length=20)
     cover = models.ImageField(default='default.jpg', upload_to='bookCovers')
     publisherName = models.CharField(max_length=20, default="no name")
     publisherDate = models.CharField(max_length=20, default='no date')
     # publisherDate = models.DateField()
     authorName = models.ForeignKey(Author, on_delete=models.CASCADE)
+    # bookComment = models.ForeignKey(Comment, on_delete=models.CASCADE)
 
 class Comment(models.Model):
     bookComment = models.TextField(default="default")
