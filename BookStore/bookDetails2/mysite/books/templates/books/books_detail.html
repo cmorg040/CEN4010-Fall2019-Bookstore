@@ -10,6 +10,8 @@
                 <style>
                 h1 {text-align: center;}
                 h4 {text-align: center;}
+                /* img {transition: 1s; width: 300px;}
+                img:hover {filter: grayscale(100%); transform:scale(1.1);} */
                 </style>
               <h1 class="display-4">{{ object.bookName }}</h1>
               <h4>By: <a href="{% url 'author-browsing' books.authorName %}">{{ object.authorName }}</a></h4>
@@ -19,7 +21,7 @@
             <div class="row">
                 <div class="col-sm">
                     <div class="media">
-                        <a class="lightbox" href="#dog"><img src="{{ object.cover.url }}" class="align-self-start mr-3" alt="..."></a>
+                        <a href="{{ object.cover.url }}"><img src="{{ object.cover.url }}"></a>
                     </div>
                 </div>
                 <div class="col-sm">
@@ -36,7 +38,6 @@
             </div>
         </div>
     </body>
-    <!-- <link rel="stylesheet" type="text/ css" href="../styles/book_detail.css">  -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </html>

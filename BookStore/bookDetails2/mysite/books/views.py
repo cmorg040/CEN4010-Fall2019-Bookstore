@@ -42,7 +42,6 @@ class BookListView(ListView):
     template_name = 'books/browsing.html'
     context_object_name = 'books'
 
-# TODO: Does not filter correctly. I believe this is the problem.
 class AuthorBookListView(ListView):
     model = Books
     template_name = 'books/author_books.html'
