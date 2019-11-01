@@ -21,7 +21,6 @@ class Books(models.Model):
     publisherDate = models.CharField(max_length=20, default='no date')
     # publisherDate = models.DateField()
     authorName = models.ForeignKey(Author, on_delete=models.CASCADE)
-    # bookComment = models.ForeignKey(Comment, on_delete=models.CASCADE)
 
 class Comment(models.Model):
     bookComment = models.TextField(default="default")

@@ -5,39 +5,6 @@ from django.template import loader, RequestContext
 from django.contrib.contenttypes.models import ContentType
 from .models import Books, Author, Comment
 
-# books = [ # post
-#     {
-#         'bookName': 'bookname',
-#         'author': 'authorname',
-#         'ratings': 'ratings',
-#         'summary': 'summary',
-#         'bookCover': 'bookCover',
-#         'authorBio': 'authorBio',
-#         'genre': 'genre',
-#         'publishingInfo': 'publishingInfo',
-#         'comments': 'comments'
-#     },
-#     {
-#         'bookName': 'bookname',
-#         'author': 'authorname',
-#         'ratings': 'ratings',
-#         'summary': 'summary',
-#         'bookCover': 'bookCover',
-#         'authorBio': 'authorBio',
-#         'genre': 'genre',
-#         'publishingInfo': 'publishingInfo',
-#         'comments': 'comments'
-#     },
-# ]
-# Create your views here.
-
-# def browsing(request):
-#     context = {
-#         'books': Books.objects.all(),
-#     }
-#     return render(request, 'books/browsing.html', context)
-    # return HttpResponse('<h1>Book Browsing page</h1>')
-
 class BookListView(ListView):
     model = Books
     template_name = 'books/browsing.html'
@@ -53,9 +20,3 @@ class AuthorBookListView(ListView):
 
 class BookDetailView(DetailView):
     model = Books
-
-    
-# def details(request):
-#     return render(request, 'books/details.html')
-    # return HttpResponse('<h1>Book details</h1>')
-
