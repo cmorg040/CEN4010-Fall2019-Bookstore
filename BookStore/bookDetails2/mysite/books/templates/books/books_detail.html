@@ -14,7 +14,7 @@
                 h4 {text-align: center;}
                 .image {width: 400px;transition: width .3s ease;}
                 .image:hover {cursor: pointer;}
-                .image.enlarged {width: 600px;}
+                .image.enlarged {width: 540px;}
                 </style>
               <h1 class="display-4">{{ object.bookName }}</h1>
               <h4>By: <a href="{% url 'author-browsing' books.authorName %}">{{ object.authorName }}</a></h4>
@@ -29,32 +29,32 @@
                                 $('.image').click(function() {
                                     $(this).toggleClass('enlarged');
                                 });
-                           </script>
+                        </script>
                     </div>
+                        <p><b>Book Rating: </b> {{ object.bookRating }}</p>
+                        <p><b>Genre:</b> {{ object.genre }}</p>
+                        <p><b>Publisher Name:</b> {{ object.publisherName }}</p>
+                        <p><b>Publisher Date:</b> {{ object.publisherDate}}</p>
                 </div>
                 <div class="col-sm">
                     <div class="media-body">
                         <p><b>Price: </b>${{ object.bookPrice }}</p>
-                        <p><b>Book Rating: </b> {{ object.bookRating }}</p>
-                        <p><b>Genre:</b> {{ object.genre }}</p>
                         <p><b>Book Summary:</b> {{ object.bookSummary }}</p>
-                        <p><b>Publisher Name:</b> {{ object.publisherName }}</p>
-                        <p><b>Publisher Date:</b> {{ object.publisherDate}}</p>
                         <p><b>Author Bio:</b> {{ object.authorName.authorBio }}</p>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm">
+                        <p><b>Comments</b></p>
+                        {% for comment in object.comments.all %}
+                            {{comment.bookComment|linebreaks}}
+                        {% empty %}
+                            <p>No comments here yet :(</p>
+                        {% endfor %}
+                </div>
+            </div>
         </div>
-        <!-- <div>
-            {% for comment in comments %}
-                <p>
-                    On {{comment.created_on.date }}&nbsp;
-                    <b>{{ comment.author }}</b> wrote:
-                </p>
-                <p>{{ comment.body }}</p>
-                <hr>
-                {% endfor %}
-        </div> -->
     </body>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
