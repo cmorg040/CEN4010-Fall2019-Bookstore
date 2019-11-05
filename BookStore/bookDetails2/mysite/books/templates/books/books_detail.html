@@ -48,12 +48,29 @@
             <div class="row">
                 <div class="col-sm">
                         <p><b>Comments</b></p>
-                        {% for comment in object.comments.all %}
-                            {{comment.bookComment|linebreaks}}
-                        {% empty %}
-                            <p>No comments here yet :(</p>
-                        {% endfor %}
+                        <div class="card">               
+                            <div class="card-body">
+                                {% for comment in object.comments.all %}
+                                    <h5 class="card-title">{{ comment.userName }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ comment.datePosted }}</h6>
+                                    <p class="card-text">{{comment.bookComment|linebreaks}}</p>
+                                    {% empty %}
+                                    <p>No comments here yet :(</p>
+                                {% endfor %}
+                            </div>             
+                        </div>     
                 </div>
+                <!-- <div class="card">
+                        <div class="card-header">
+                          Quote
+                        </div>
+                        <div class="card-body">
+                          <blockquote class="blockquote mb-0">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                          </blockquote>
+                        </div>
+                      </div> -->
             </div>
         </div>
     </body>

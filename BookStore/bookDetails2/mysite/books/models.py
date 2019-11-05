@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 
 # Create your models here.
 
@@ -23,6 +23,8 @@ class Books(models.Model):
     authorName = models.ForeignKey(Author, on_delete=models.CASCADE)
 
 class Comment(models.Model):
+    userName = models.TextField(default="userName")
+    datePosted = models.DateTimeField(default = datetime.now, blank=True)
     bookComment = models.TextField(default="default")
     books = models.ForeignKey(Books, on_delete=models.CASCADE, related_name='comments')
 
