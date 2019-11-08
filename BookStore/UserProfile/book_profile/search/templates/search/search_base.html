@@ -1,0 +1,67 @@
+<!-- This will inherit from the __base.html located in this directory -->
+<!-- The navbar will be located here -->
+
+{% extends "storePage/partials/__base.html" %}
+<!-- This is the main header and footer that all html will fallow by -->
+{% load crispy_forms_tags %}
+<!-- This will make the form look better, less code. -->
+{% block body %}
+
+<!-- This page will allow the user to log in to their account -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    input[type=text] {
+        width: 130px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        background-image: url('searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+    }
+
+    input[type=text]:focus {
+        width: 100%;
+    }
+</style>
+</head>
+
+<body>
+
+    <form>
+        <input type="text" name="search" placeholder="Search..">
+    </form>
+    {{ page = page_by_title }}
+    <table style="width:100%">
+        <tr>
+            <th style="width:10%">Cover</th>
+            <th style="width:20%"><a href=""Title</th>
+            <th style="width:10%">Author</th>
+            <th style="width:10%">Genre</th>
+            <th style="width:10%">Units Sold</th>
+            <th style="width:10%">Rating</th>
+            <th style="width:10%">Price</th>
+            <th style="width:10%">Release Date</th>
+            <th style="width:20%">Description</th>
+        {% for book in page %}
+            </tr>
+                <td>{{ book.cover }}</td>
+                <td><a href="">{{ book.title }}</a></td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.genre }}</td>
+                <td>{{ book.num_sales }}</td>
+                <td>{{ book.rating }}</td>
+                <td>{{ book.price }}</td>
+                <td>{{ book.release_date }}</td>
+                <td>{{ book.description }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+{% endblock %}

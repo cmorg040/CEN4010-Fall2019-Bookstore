@@ -1,0 +1,42 @@
+<!-- This will inherit from the __base.html located in this directory -->
+<!-- The navbar will be located here -->
+{% extends "storePage/partials/__base.html" %}
+<!-- This is the main header and footer that all html will fallow by -->
+{% load crispy_forms_tags %}
+<!-- This will make the form look better, less code. -->
+{% block body %}
+
+<!--This page is so the user is able to sign up and create a new profile by creating a profile like this
+    you will not have admin rights
+-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <div id="first">
+                <div class="myform form " style = "margin-top:35px">
+                    <!--use crispy form, to set up users accounts, less code and done automatically-->
+                    <form method="POST" name="signup">{% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="col-md-12 text-center " style = "margin-top: 35px;">
+                            <button type="submit" class=" btn btn-block mybtn btn-success tx-tfm">Sign up</button>
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="login-or" style="text-align: center;">
+                            </div>
+                        </div>
+                        <div class="form-group" style = "margin-top: 35px;">
+                            <!--If user has an account then redirect to log in page-->
+                            <p class="text-center">Do You Have An Account?
+                                <a class="text-info bg-dark" href="/login/">
+                                    Click Here To Login!
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

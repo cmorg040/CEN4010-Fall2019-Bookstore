@@ -1,0 +1,28 @@
+<!--Here I got the base from user base because all of these new pages will be directly under the 4 buttons-->
+{% extends "users/partials/_base.html" %}
+{% load crispy_forms_tags %}
+<!-- This will make the form look better, less code. -->
+{% block settingsPageInfo %}
+
+<!--This page is to see the users current username and email address and is allowed to update it-->
+<div class="card bg-dark text-primary" style="text-align:center;vertical-align:middle; margin:auto;">
+    <div class="card-body ">
+        <div class="col-md-12 border-bottom pt-4 border-success" style = "padding-bottom: 15px;">
+            <h3 class="text-success">User Settings</h3>
+        </div>
+    </div>
+    <div class = "container">
+        <!--use crispy form to get all attributes from user. less coding-->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        {{ userForm|crispy }}
+        <div class="form-group">
+            <!--Click to update form-->
+            <button class="btn btn-outline-success" type="submit">Update</button>
+        </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

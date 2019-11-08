@@ -1,0 +1,21 @@
+<!-- This will inherit from the __base.html located in this directory -->
+<!-- The navbar will be located here -->
+{% extends "storePage/partials/__base.html" %}
+<!-- This is the main header and footer that all html will fallow by -->
+{% load crispy_forms_tags %}
+<!-- This will make the form look better, less code. -->
+{% block body %}
+
+<!-- This page will be displayed once user have logged out -->
+<main role="main" class="container" style = "margin-top:40px">
+    <div>
+        <h1>You have logged out...</h1>
+        <div class="border-top pt-4 border-primary">
+            <!-- add link if you want to relog in -->
+            <a href="{% url 'login' %}" class="text-success" style="font-size: 20px">
+                Click Here To Log In Again!
+            </a>
+        </div>
+    </div>
+</main>
+{% endblock %}
