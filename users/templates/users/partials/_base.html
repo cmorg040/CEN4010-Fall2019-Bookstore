@@ -1,0 +1,61 @@
+<!-- This will inherit from the __base.html located in this directory -->
+<!-- The navbar will be located here -->
+{% extends "storePage/partials/__base.html" %}
+<!-- This is the main header and footer that all html will fallow by -->
+{% load crispy_forms_tags %}
+<!-- This will make the form look better, less code. -->
+{% block body %}
+
+<!--I did not add css file so this is the only style script I added to center everything-->
+<style>
+    .center {
+      margin: auto;
+      padding: 10px;
+    }
+</style>
+
+<div class="container bootstrap snippet" >
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <div>
+        <label class="card-header text-danger" style="font-size:30px">Personal Setting</label>
+    </div>
+    <div class="row">
+        <!--Add button for Profile-->
+        <div class="col-sm">
+            <a href="{% url 'settings:profile-settings' %}" class="list-group-item list-group-item-action {% if 'profile' in request.resolver_match.url_name %} active {% endif %}">
+                <i class="fas fa-user-astronaut"></i> Profile</a>
+        </div>
+        <!--Add button for Account Settings-->
+        <div class="col-sm">
+            <a href="{% url 'settings:account-settings' %}" class="list-group-item list-group-item-action {% if 'account' in request.resolver_match.url_name %} active {% endif %} ">
+                <i class="fas fa-user fa-fw"></i> Account Setting</a>
+        </div>
+        <!--Add button for Credit Card-->
+        <div class="col-sm">
+            <a href="{% url 'settings:billing-settings' %}" class="list-group-item list-group-item-action {% if 'billing' in request.get_full_path %} active {% endif %}">
+                <i class="far fa-credit-card"></i> Credit Card</a>
+        </div>
+        <!--Add button for Security-->
+        <div class="col-sm">
+            <a href="{% url 'settings:security-settings' %}" class="list-group-item list-group-item-action {% if 'security' in request.resolver_match.url_name %} active {% endif %}">
+                <i class="fas fa-user-shield"></i> Security</a>
+        </div>
+        <div style="margin-bottom: 100px;"></div>
+
+        <!-- Center-right navBar-->
+        <div class="center col-md-9" style="margin-bottom: 20px;">
+            <!--add the new pages for user settings will be directly under this block-->
+            {% block settingsPageInfo %} {% endblock %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

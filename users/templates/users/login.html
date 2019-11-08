@@ -1,0 +1,39 @@
+<!-- This will inherit from the __base.html located in this directory -->
+<!-- The navbar will be located here -->
+{% extends "storePage/partials/__base.html" %}
+<!-- This is the main header and footer that all html will fallow by -->
+{% load crispy_forms_tags %}
+<!-- This will make the form look better, less code. -->
+{% block body %}
+
+<!-- This page will allow the user to log in to their account -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <div id="first">
+                <div class="myform form " style = "margin-top:35px">
+                    <!-- Get username and password -->
+                    <form method="POST" name="login">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ form|crispy }}
+                        </div>
+                        <div class="col-md-12 text-center ">
+                            <!-- if account found then log in and redirect them to bookstore page -->
+                            <button type="submit" class=" btn btn-block mybtn btn-light tx-tfm" style = "margin-top: 40px">
+                                Login
+                            </button>
+                        </div>
+                        <!-- If user does not have an account then redirect them to sign up page -->
+                        <div class="form-group text-center" style = "margin-top: 35px;">
+                            <p>Would you like to create an account? </p>
+                            <a href="{% url 'signup' %}" id="signup" class="text-success">Sign up here</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
