@@ -40,15 +40,15 @@
     <table style="width:100%">
         <tr>
             <th style="width:10%">Cover</th>
-            <th style="width:20%"><a href="/author">Title</a></th>
-            <th style="width:10%">Author</th>
+            <th style="width:20%"><a href="{% url 'search:title' %}">Title</a></th>
+            <th style="width:10%"><a href="{% url 'search:author' %}">Author</a></th>
             <th style="width:10%">Genre</th>
             <th style="width:10%">Units Sold</th>
-            <th style="width:10%">Rating</th>
-            <th style="width:10%">Price</th>
-            <th style="width:10%">Release Date</th>
+            <th style="width:10%"><a href="{% url 'search:rating' %}">Rating</a></th>
+            <th style="width:10%"><a href="{% url 'search:price' %}">Price</a></th>
+            <th style="width:10%"><a href="{% url 'search:date' %}">Release Date</a></th>
             <th style="width:20%">Description</th>
-        {% for book in page %}
+        {% for book in books %}
             </tr>
                 <td>{{ book.cover }}</td>
                 <td><a href="">{{ book.title }}</a></td>
@@ -62,5 +62,27 @@
             </tr>
         {% endfor %}
     </table>
+
+    {% if books.has_other_pages %}
+  <ul class="pagination">
+    {% if books.has_previous %}
+      <li><a href="?page={{ books.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in books.paginator.page_range %}
+      {% if books.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if books.has_next %}
+      <li><a href="?page={{ books.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
 </body>
 {% endblock %}

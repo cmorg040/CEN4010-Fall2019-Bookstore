@@ -7,7 +7,11 @@ app_name = 'search'
 
 urlpatterns = [
     path('', views.search_by_title, name='search'),
+    path('title', views.search_by_title, name='title'),
     path('author', views.search_by_author, name='author'),
+    path('price', views.search_by_price, name='price'),
+    path('rating', views.search_by_rating, name='rating'),
+    path('date', views.search_by_date, name='date'),
     # path('', views.search_by_author, name='search_by_author'),
 ]
 
