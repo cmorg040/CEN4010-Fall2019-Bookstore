@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Django GeekText</title>
+    </head>
+    <body>
+    {% if books %}
+        <ul>
+            {% for book in books %}
+           <li><a href = '/books/{{book.id}}'><b>{{book.bookName}}</b></a></li>
+           <p>By: {{ book.authorName }}</p>
+           <img src="{{ book.cover.url }}">
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no books to be displayed</p>
+    {% endif %}
+
+    </body>
+</html>

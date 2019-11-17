@@ -1,0 +1,79 @@
+<!-- https://api.jquery.com/click/ -->
+<!-- https://tutorial-extensions.djangogirls.org/en/homework_create_more_models/ -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <meta charset="UTF-8">
+        <title>{{ object.bookName }}</title>
+    </head>
+    <body>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <style>
+                h1 {text-align: center;}
+                h4 {text-align: center;}
+                .image {width: 400px;transition: width .3s ease;}
+                .image:hover {cursor: pointer;}
+                .image.enlarged {width: 540px;}
+                </style>
+              <h1 class="display-4">{{ object.bookName }}</h1>
+              <h4>By: <a href="{% url 'author-browsing' books.authorName %}">{{ object.authorName }}</a></h4>
+            </div>
+          </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="media">
+                        <img class="image" src="{{ object.cover.url }}">
+                        <script>
+                                $('.image').click(function() {
+                                    $(this).toggleClass('enlarged');
+                                });
+                        </script>
+                    </div>
+                        <p><b>Book Rating: </b> {{ object.bookRating }}</p>
+                        <p><b>Genre:</b> {{ object.genre }}</p>
+                        <p><b>Publisher Name:</b> {{ object.publisherName }}</p>
+                        <p><b>Publisher Date:</b> {{ object.publisherDate}}</p>
+                </div>
+                <div class="col-sm">
+                    <div class="media-body">
+                        <p><b>Price: </b>${{ object.bookPrice }}</p>
+                        <p><b>Book Summary:</b> {{ object.bookSummary }}</p>
+                        <p><b>Author Bio:</b> {{ object.authorName.authorBio }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                        <p><b>Comments</b></p>
+                        <div class="card">               
+                            <div class="card-body">
+                                {% for comment in object.comments.all %}
+                                    <h5 class="card-title">{{ comment.userName }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ comment.datePosted }}</h6>
+                                    <p class="card-text">{{comment.bookComment|linebreaks}}</p>
+                                    {% empty %}
+                                    <p>No comments here yet :(</p>
+                                {% endfor %}
+                            </div>             
+                        </div>     
+                </div>
+                <!-- <div class="card">
+                        <div class="card-header">
+                          Quote
+                        </div>
+                        <div class="card-body">
+                          <blockquote class="blockquote mb-0">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                          </blockquote>
+                        </div>
+                      </div> -->
+            </div>
+        </div>
+    </body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>
