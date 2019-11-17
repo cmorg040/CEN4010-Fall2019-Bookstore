@@ -15,10 +15,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 items_per_page = 10
 
 def index(request):
-    user_list = Book.objects.order_by("title")
+    book_list = Book.objects.all()
     page = request.GET.get('page', 1)
 
-    paginator = Paginator(user_list, items_per_page)
+    paginator = Paginator(book_list, items_per_page)
     try:
         books = paginator.page(page)
     except PageNotAnInteger:
@@ -30,10 +30,23 @@ def index(request):
 
 def search_by_title(request):
 
-    page_by_title = Book.objects.order_by("title")[0:items_per_page]
-    # page_by_author = Book.objects.order_by("author")[0:items_per_page]
+    book_list = Book.objects.order_by("title")
+    page = request.GET.get('page', 1)
 
-    return render(request, 'search/search_base.html', {'books': page_by_title})
+    paginator = Paginator(book_list, items_per_page)
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+
+    return render(request, 'search/search_base.html', { 'books': books })
+
+    # page_by_title = Book.objects.order_by("title")[0:items_per_page]
+    # # page_by_author = Book.objects.order_by("author")[0:items_per_page]
+
+    # return render(request, 'search/search_base.html', {'books': page_by_title})
 
 def search_by_author(request):
 

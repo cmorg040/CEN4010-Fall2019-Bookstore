@@ -1,6 +1,7 @@
 from django.db import models
 
 class Book(models.Model):
+    # cover = models.ForeignKey('books.Books', on_delete=models.CASCADE, default='default.jpg')
     title = models.CharField('Book Title', max_length=120)
     author = models.CharField('Author', max_length=50)
     genre = models.CharField('Genre', max_length=20)
