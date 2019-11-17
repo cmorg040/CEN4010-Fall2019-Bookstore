@@ -22,6 +22,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 
+    'books.apps.BookConfig',
     'search.apps.SearchConfig',         #Searches books in Database. 
     'storePage.apps.StorepageConfig',   # Display general views for other apps
     'users.apps.UsersConfig',           # Holds user data and it's views

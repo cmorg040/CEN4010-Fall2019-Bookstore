@@ -24,6 +24,9 @@ urlpatterns = [
 
     #Search page
     path('search/', include('search.urls', namespace='search')),
+
+    #Book details
+    path('books/', include('books.urls', namespace='books')),
 ]
 
 if settings.DEBUG:
