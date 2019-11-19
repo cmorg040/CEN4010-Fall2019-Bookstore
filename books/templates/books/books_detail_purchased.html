@@ -78,15 +78,19 @@
                             <blockquote class="blockquote">
                                 <cite title="Source Title">
                                     {% if review.anonymous %}
-                                    <img class="rounded-circle account-img" src="/static/images/anon.png" width="50" height="50">
                                         Anonymous
+                                    {% elif review.nickname %}
+                                        {{ review.writer|capfirst }}
                                     {% else %}
-                                        <img class="rounded-circle account-img" src="{{ review.author.profile.profilePic.url }}" width="50" height="50">
-                                        {{ review.author|capfirst }}
+                                        {{ review.writer|capfirst }}
                                     {% endif %}
-                                     | {{ review.date_posted }}</cite>
+                                     | {{ review.date }}</cite>
                                 <p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star(s)</p>
-                                <p class="mb-0">{{ review.content }}</p>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="card-text">{{ review.comment }}</p>
+                                    </div>
+                                </div>
                             </blockquote>
                         {% endfor %}
                     </div>

@@ -9,7 +9,7 @@ from django.template import loader, RequestContext
 from django.contrib.contenttypes.models import ContentType
 
 from books.forms import RevForm
-from .models import Books, Author, Comment, Review, Profile, User_Bought
+from .models import Books, Author, Comment, Review, Profile, UserBought
 
 class BookListView(ListView):
     model = Books
@@ -35,7 +35,7 @@ def ReviewView(request, id):
     if user.is_authenticated:
         this_user_review = reviews.filter(writer=user)
         reviews_minus_this_user = reviews.exclude(writer=user)
-        purchased = User_Bought.objects.filter(book=book, user=user).exists()
+        purchased = UserBought.objects.filter(book=book, user=user).exists()
         reviewed_already = Review.objects.filter(book=book, writer=user).exists()
     else:
         this_user_review = None

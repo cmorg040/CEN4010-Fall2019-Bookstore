@@ -52,7 +52,7 @@ class Profile(models.Model):
 
 
 # Book_User hold the history of books purchased by users.
-class User_Bought(models.Model):
+class UserBought(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Books, on_delete=models.CASCADE)
 
@@ -79,7 +79,7 @@ class Review(models.Model):
     date = models.DateField(default=datetime.now)
 
     # comment review
-    comment = models.TextField(blank=True, null=True, max_length=800)
+    comment = models.TextField(blank=True, null=True, max_length=700)
 
     def __str__(self):
         return '{} rating for {}'.format(self.rating, self.book.bookName)
