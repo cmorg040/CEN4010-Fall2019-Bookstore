@@ -58,8 +58,11 @@
                                     <div class="blockquote">
                                         <cite title="Source Title">
                                             {{ this_review.writer|capfirst }} | {{ this_review.date }}</cite>
-                                        <p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Star(s)</p>
-                                        <div class="card">
+                                            {% if this_review.rating == 1 %}
+                                                <p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Star</p>
+                                            {% else %}
+                                                <p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Stars</p>
+                                            {% endif %}                                        <div class="card">
                                             <div class="card-body">
                                                 <p class="card-text">{{ this_review.comment }}</p>
                                             </div>
@@ -85,7 +88,11 @@
                                         {{ review.writer|capfirst }}
                                     {% endif %}
                                      | {{ review.date }}</cite>
-                                <p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star(s)</p>
+                                {% if review.rating == 1 %}
+                                    <p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star</p>
+                                {% else %}
+                                    <p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Stars</p>
+                                {% endif %}
                                 <div class="card">
                                     <div class="card-body">
                                         <p class="card-text">{{ review.comment }}</p>
