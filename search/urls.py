@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf.urls import include, url
 from . import views
-from search.views import *
+from .views import *
 
 app_name = 'search'
 
@@ -12,11 +12,17 @@ urlpatterns = [
     path('price', views.search_by_price, name='price'),
     path('rating', views.search_by_rating, name='rating'),
     path('date', views.search_by_date, name='date'),
+    path('genre', views.search_by_genre, name='genre'),
+    path('rating>=1', views.search_by_rating1, name='rating1'),
+    path('rating>=2', views.search_by_rating2, name='rating2'),
+    path('rating>=3', views.search_by_rating3, name='rating3'),
+    path('rating>=4', views.search_by_rating4, name='rating4'),
+    path('rating>=5', views.search_by_rating5, name='rating5'),
     # path('', views.search_by_author, name='search_by_author'),
 ]
 
-from django.urls import path, include   # path is to create the path in urlpatterns
-from . import views # Import the views defined in the current directory
+# from django.urls import path, include   # path is to create the path in urlpatterns
+# from . import views # Import the views defined in the current directory
 
 # Name of the app needed for the namespace on urls.py
 # app_name = 'settings'

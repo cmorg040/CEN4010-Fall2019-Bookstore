@@ -9,81 +9,105 @@
 
 <!-- This page will allow the user to log in to their account -->
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <style>
-    input[type=text] {
-        width: 130px;
-        box-sizing: border-box;
-        border: 2px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
-        background-color: white;
-        background-image: url('searchicon.png');
-        background-position: 10px 10px;
-        background-repeat: no-repeat;
-        padding: 12px 20px 12px 40px;
-        -webkit-transition: width 0.4s ease-in-out;
-        transition: width 0.4s ease-in-out;
-    }
+  input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
 
-    input[type=text]:focus {
-        width: 100%;
-    }
+  input[type=text]:focus {
+    width: 100%;
+  }
+
+  /* .rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+  }
+
+  .rating>span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+  }
+
+  .rating>span:hover:before,
+  .rating>span:hover~span:before {
+    content: "\2605";
+    position: absolute;
+  } */
 </style>
-</head>
+<!-- </head> -->
+<!-- 
+<body> -->
 
-<body>
+<form>
+  <input type="text" name="search" placeholder="Search..">
+</form>
+<table style="width:100%">
+  <tr>
+    <th style="width:10%">Cover</th>
+    <th style="width:20%"><a href="{% url 'search:title' %}">Title</a></th>
+    <th style="width:10%"><a href="{% url 'search:author' %}">Author</a></th>
+    <th style="width:10%"><a href="{% url 'search:genre' %}">Genre</a></th>
+    <th style="width:10%">Units Sold</th>
+    <th style="width:10%">Rating
+      <div class="rating">
+        <span><a href="{% url 'search:rating1' %}">☆</a></span>
+        <span><a href="{% url 'search:rating2' %}">☆</a></span>
+        <span><a href="{% url 'search:rating3' %}">☆</a></span>
+        <span><a href="{% url 'search:rating4' %}">☆</a></span>
+        <span><a href="{% url 'search:rating5' %}">☆</a></span>
+      </div>
+    </th>
+    <th style="width:10%"><a href="{% url 'search:price' %}">Price</a></th>
+    <th style="width:10%"><a href="{% url 'search:date' %}">Release Date</a></th>
+    <th style="width:20%">Description</th>
+    {% for book in books %}
+  </tr>
+  <td><img src="{{ book.cover.url }}" width="50px"></td>
+  <td><a href="/books/{{book.id}}">{{ book.bookName }}</a></td>
+  <td>{{ book.authorName }}</td>
+  <td>{{ book.genre }}</td>
+  <td>{{ book.bookSales }}</td>
+  <td>{{ book.bookRating }}</td>
+  <td>{{ book.bookPrice }}</td>
+  <td>{{ book.publisherDate }}</td>
+  <td>{{ book.bookSummary}}</td>
+  </tr>
+  {% endfor %}
+</table>
 
-    <form>
-        <input type="text" name="search" placeholder="Search..">
-    </form>
-    <table style="width:100%">
-        <tr>
-            <th style="width:10%">Cover</th>
-            <th style="width:20%"><a href="{% url 'search:title' %}">Title</a></th>
-            <th style="width:10%"><a href="{% url 'search:author' %}">Author</a></th>
-            <th style="width:10%">Genre</th>
-            <th style="width:10%">Units Sold</th>
-            <th style="width:10%"><a href="{% url 'search:rating' %}">Rating</a></th>
-            <th style="width:10%"><a href="{% url 'search:price' %}">Price</a></th>
-            <th style="width:10%"><a href="{% url 'search:date' %}">Release Date</a></th>
-            <th style="width:20%">Description</th>
-        {% for book in books %}
-            </tr>
-                <!-- <td>{{ book.cover }}</td> -->
-                <td><img src="{{ book.cover.url }}" alt="" border=3 height=100 width=100></img></td>
-                <td><a href="">{{ book.title }}</a></td>
-                <td>{{ book.author }}</td>
-                <td>{{ book.genre }}</td>
-                <td>{{ book.num_sales }}</td>
-                <td>{{ book.rating }}</td>
-                <td>{{ book.price }}</td>
-                <td>{{ book.release_date }}</td>
-                <td>{{ book.description }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
-    {% if books.has_other_pages %}
-  <ul class="pagination">
-    {% if books.has_previous %}
-      <li><a href="?page={{ books.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in books.paginator.page_range %}
-      {% if books.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if books.has_next %}
-      <li><a href="?page={{ books.next_page_number }}">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
+{% if books.has_other_pages %}
+<ul class="pagination">
+  {% if books.has_previous %}
+  <li><a href="?page={{ books.previous_page_number }}">&laquo;</a></li>
+  {% else %}
+  <li class="disabled"><span>&laquo;</span></li>
+  {% endif %}
+  {% for i in books.paginator.page_range %}
+  {% if books.number == i %}
+  <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+  {% else %}
+  <li><a href="?page={{ i }}">{{ i }}</a></li>
+  {% endif %}
+  {% endfor %}
+  {% if books.has_next %}
+  <li><a href="?page={{ books.next_page_number }}">&raquo;</a></li>
+  {% else %}
+  <li class="disabled"><span>&raquo;</span></li>
+  {% endif %}
+</ul>
 {% endif %}
-</body>
+<!-- </body> -->
 {% endblock %}

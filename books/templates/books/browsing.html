@@ -1,10 +1,19 @@
-<!DOCTYPE html>
+<!-- This will inherit from the __base.html located in this directory -->
+<!-- The navbar will be located here -->
+{% extends "storePage/partials/__base.html" %}
+<!-- This is the main header and footer that all html will fallow by -->
+{% load crispy_forms_tags %}
+<!-- This will make the form look better, less code. -->
+{% block body %}
+
+<!-- <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Django GeekText</title>
     </head>
-    <body>
+    <body> -->
+<div>
     {% if books %}
         <ul>
             {% for book in books %}
@@ -16,6 +25,8 @@
     {% else %}
         <p>There are no books to be displayed</p>
     {% endif %}
-
-    </body>
-</html>
+</div>
+{% endblock %}
+<!-- 
+    </body> -->
+<!-- </html> -->
