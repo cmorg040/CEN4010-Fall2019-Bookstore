@@ -1,0 +1,42 @@
+<!--Here I got the base from user base because all of these new pages will be directly under the 4 buttons-->
+{% extends "users/partials/_base.html" %}
+{% load crispy_forms_tags %}
+<!-- This will make the form look better, less code. -->
+{% block settingsPageInfo %}
+
+
+<!--This page is to see and add the user name and other information-->
+<div class="card bg-dark text-primary" style="text-align:center;vertical-align:middle; margin:auto;" >
+    <div class="card-body">
+        <!-- Top Label-->
+        <div class="col-md-12 border-bottom pt-4 border-success" style = "padding-bottom: 15px;">
+            <h3 class="text-success">Profile Overview</h3>
+        </div>
+        <div class="tab-content" >
+            <div class="form-group">
+                <br>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- Display the user first name -->
+                    {{ userProfileForm.first_name |as_crispy_field }}
+
+                    <!-- Display the user last name -->
+                    {{ userProfileForm.last_name |as_crispy_field }}
+
+                    <!-- Display the user nickname -->
+                    {{ userNicknameForm.nick_name |as_crispy_field }}
+
+                    <!-- Display the user biography -->
+                    {{ userBioForm.bio |as_crispy_field }}
+
+                    <div class="form-group">
+                        <button class="btn btn-outline-success" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

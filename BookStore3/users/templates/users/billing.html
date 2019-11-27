@@ -1,0 +1,139 @@
+<!--Here I got the base from user base because all of these new pages will be directly under the 4 buttons-->
+{% extends "users/partials/_base.html" %}
+{% load crispy_forms_tags %}
+<!-- This will make the form look better, less code. -->
+{% block settingsPageInfo %}
+
+
+<!-- This page will show the billing tab, this page will have two sections, one to display all the users address
+    and another one to display all the users credit cards.
+-->
+<div class="card-body bg-dark text-primary" style="text-align:center;vertical-align:middle; margin:auto;">
+    <div class="row">
+        <div class="col-md-12 border-bottom pt-4 border-success" style = "padding-bottom: 15px;">
+            <h3 class="text-success">Billing Information</h3>
+        </div>
+    </div>
+    <br>
+    <!-- Navbar Menu to switch between addresses and credit card info -->
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-addresses-tab" data-toggle="tab" href="#nav-addresses" role="tab"
+                aria-controls="nav-addresses" aria-selected="true">Your Addresses</a>
+            <a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab"
+                aria-controls="nav-payment" aria-selected="false">Your Credit Card Info</a>
+        </div>
+    </nav>
+
+    <!-- This section will display all the users primary addresses even if you switch between tabs-->
+    <div class="card-body">
+        <div class="card">
+            <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="card-body bg-dark text-primary">
+                    <!-- Loop through all the primary addresses and display it on the website -->
+                    {% if primaryAddressCheck is True %}
+                        <h4 class="text-success">My Primary Address</h4>
+                        {% for address in userAddressList %}
+                            <!-- get all addresses from address list that have primary check -->
+                            {% if address.primaryAddress is True %}
+                                <br>
+                                <h6 class="card-subtitle mb-2 text-info">{{ address.name }}</h6>
+                                <div class="row text-white">
+                                    <!-- Print out the address using this format -->
+                                    <div class="col-lg-12">
+                                        {{ address.address1 }}, {{ address.address2 }}
+                                        <br>
+                                        {{ address.state }}, {{ address.zipcode }}
+                                        <div class="float-right">
+                                            <a href="{{ address.get_absolute_url }}">Edit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    <!-- If there are no primary address added then display this message -->
+                    {% else %}
+                        <h5 class="text-danger">Primary Address Has Not Been Set!</h5>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- When address tab is pressed, then display all the users address that are not primary addresses -->
+        <div class="tab-content " id="nav-tabContent">
+            <!-- Address tab -->
+            <div class="tab-pane fade show active" id="nav-addresses" role="tabpanel" aria-labelledby="nav-addresses-tab">
+                <br>
+                <h6 class="text-secondary"> My Other shipping address</h6>
+                <!-- for all addresses in address list print users address that are not primary -->
+                {% for address in userAddressList %}
+                    {% if address.primaryAddress is False %}
+                    <div class="card">
+                        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="card-body bg-dark">
+                                <h6 class="card-subtitle mb-2 text-info">{{ address.name }}</h6>
+                                <div class="row text-white">
+                                    <div class="col-lg-12">
+                                        {{ address.address1 }}, {{ address.address2 }}
+                                        <br>
+                                        {{ address.state }}, {{ address.zipcode }}
+                                        <div class="float-right">
+                                            <a href="{{ address.get_absolute_url }}">Edit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Button to add a new address, will redirect you to a new page -->
+                <a type="button" class="btn btn-outline-danger float-left" style="margin-bottom: 10px;"
+                   href="{% url 'settings:add-address' %}">
+                    Add New Address
+                </a>
+            </div>
+
+            <!-- When your credit card tab is pressed then show all the users credit card information -->
+            <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
+                <br>
+                <h6 class="text-secondary"> My Credit Card Info</h6>
+
+                <!-- No condition statement, just print all credit cards -->
+                {% for creditcard in userCreditCards %}
+                    <div class="card">
+                        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                            <div class="card-body bg-dark">
+                                <h6 class="card-subtitle mb-2 text-info">{{ creditcard.name }}</h6>
+                                <div class="row text-white">
+                                    <!-- Print credit cards using this format -->
+                                    <div class="col-lg-12">
+                                        Number: {{ creditcard.number }}
+                                        <br>
+                                        Expires: {{ creditcard.expdate_month }}/ {{ creditcard.expdate_year }}
+                                        <div class="float-right">
+                                            <a href="{{ creditcard.get_absolute_url }}">Edit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+
+                <!-- Button to add a new credit card, will redirect you to a new page -->
+                <a type="button" class="btn btn-outline-danger float-left" style="margin-bottom: 10px;"
+                    href="{% url 'settings:add-creditcard' %}">
+                    Add New Credit Card
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

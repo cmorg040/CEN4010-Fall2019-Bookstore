@@ -1,0 +1,116 @@
+<!-- This will inherit from the __base.html located in this directory -->
+<!-- The navbar will be located here -->
+{% extends "storePage/partials/__base.html" %}
+<!-- This is the main header and footer that all html will fallow by -->
+{% load crispy_forms_tags %}
+<!-- This will make the form look better, less code. -->
+{% block body %}
+<!-- https://api.jquery.com/click/ -->
+<!-- https://tutorial-extensions.djangogirls.org/en/homework_create_more_models/ -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <style>
+                h1, h4, h5, h6 {color: black;}
+                h1 {text-align: center;}
+                h4 {text-align: center;}
+                .image {width: 400px;transition: width .3s ease;}
+                .image:hover {cursor: pointer;}
+                .image.enlarged {width: 540px;}
+        </style>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Review Page</h1>
+                <h4>Book: <a href="/books/{{id}}">{{ book_title }}</a></h4>
+            </div>
+          </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <div>
+                        {% if reviewed_already %}
+                            <li>
+                                <div class="alert alert-warning"> You have already reviewed this book. </div>
+                            </li>
+                        {%  else %}
+                            {% if reviews.count == 0 %}
+                                <p>Be the first to review this book!</p>
+                            {% elif this_user_review|length == 0 %}
+                                <p>Create a review!</p>
+                            {% endif %}
+
+                            <form method="post" class="review-form-group">
+                                <p>Write a review no more than 700 characters long.</p>
+                                {% csrf_token %}
+                                {{ review_form.as_p}}
+                                <input type="submit" value="Review" class="btn btn-outline-success" id="review-btn">
+                            </form>
+                        {% endif %}
+
+                        <div class="main-content-section">
+                            {% if average_rating %}
+                                <p class="ave-rating">Average Rating: {{ average_rating|floatformat:2 }}</p>
+                            {% endif %}
+                            <h2>{{ reviews.count }} Review{{ reviews|pluralize }}</h2>
+                            {% if this_user_review %}
+                                <h3>Your review:</h3>
+                                {% for this_review in this_user_review %}
+                                    <div class="blockquote">
+                                        <cite title="Source Title">
+                                            {{ this_review.writer|capfirst }} | {{ this_review.date }}</cite>
+                                            {% if this_review.rating == 1 %}
+                                                <p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Star</p>
+                                            {% else %}
+                                                <p class="mb-0"><span class="rating">Rating:</span> {{ this_review.rating }} Stars</p>
+                                            {% endif %}                                        
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h6 class="card-text">{{ this_review.comment }}</h6>
+                                                </div>
+                                            </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <h2 style="background-color:#e0e0e0; border-radius:15px;padding:2px;"></h2>
+                        {% if this_user_review and reviews_minus_this_user.count > 0 %}
+                            <h3>Other's reviews:</h3>
+                        {% endif %}
+                        {% for review in reviews_minus_this_user %}
+                            <blockquote class="blockquote">
+                                <cite title="Source Title">
+                                    {% if review.anonymous %}
+                                        Anonymous
+                                    {% elif review.nickname %}
+                                        {{ review.writer|capfirst }}
+                                    {% else %}
+                                        {{ review.writer|capfirst }}
+                                    {% endif %}
+                                     | {{ review.date }}</cite>
+                                {% if review.rating == 1 %}
+                                    <p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Star</p>
+                                {% else %}
+                                    <p class="mb-0"><span class="rating">Rating:</span> {{ review.rating }} Stars</p>
+                                {% endif %}
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-text">{{ review.comment }}</h6>
+                                    </div>
+                                </div>
+                            </blockquote>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>
+{% endblock %}
