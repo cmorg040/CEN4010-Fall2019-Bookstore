@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from books.models import Books, Author
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import operator
 from django.db.models import Q, F
 from django.views.generic import ListView
 from django.core.exceptions import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .forms import GenreBrowseForm
 
 #def index(request):
 #    books = Book.objects.order_by('title')
@@ -192,3 +193,128 @@ def search_by_rating5(request):
         books = paginator.page(paginator.num_pages)
 
     return render(request, 'search/search_base.html', { 'books': books })
+
+def browse_fantasy(request):
+
+    book_list = Books.objects.filter(genre='Fantasy')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(book_list, items_per_page)
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+
+    return render(request, 'search/search_base.html', { 'books': books })
+
+def browse_fiction(request):
+
+    book_list = Books.objects.filter(genre='Fiction')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(book_list, items_per_page)
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+
+    return render(request, 'search/search_base.html', { 'books': books })
+
+def browse_nonfiction(request):
+
+    book_list = Books.objects.filter(genre='Non-Fiction')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(book_list, items_per_page)
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+
+    return render(request, 'search/search_base.html', { 'books': books })
+
+def browse_mystery(request):
+
+    book_list = Books.objects.filter(genre='Mystery')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(book_list, items_per_page)
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+
+    return render(request, 'search/search_base.html', { 'books': books })
+
+def browse_romance(request):
+
+    book_list = Books.objects.filter(genre='Romance')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(book_list, items_per_page)
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+
+    return render(request, 'search/search_base.html', { 'books': books })
+
+
+def browse_scifi(request):
+
+    book_list = Books.objects.filter(genre='Sci-Fi')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(book_list, items_per_page)
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+
+    return render(request, 'search/search_base.html', { 'books': books })
+
+def browse_top(request):
+
+    book_list = Books.objects.filter(bookSales__gte=100).order_by("bookSales")
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(book_list, items_per_page)
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+
+    return render(request, 'search/search_base.html', { 'books': books })
+
+# def genre_browse(request):
+#     if request.method == 'POST':
+#         form = GenreBrowseForm(request.POST)
+#         if form.is_valid():
+#             genre_to_browse = HttpRequest.POST
+
+#             book_list = Books.objects.filter(genre=genre_to_browse).order_by("bookRating")
+#             page = request.GET.get('page', 1)
+
+#             paginator = Paginator(book_list, items_per_page)
+#             try:
+#                 books = paginator.page(page)
+#             except PageNotAnInteger:
+#                 books = paginator.page(1)
+#             except EmptyPage:
+#                 books = paginator.page(paginator.num_pages)
+
+#             return render(request, 'search/search_base.html', { 'books': books })

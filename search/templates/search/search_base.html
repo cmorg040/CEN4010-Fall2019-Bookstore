@@ -10,26 +10,8 @@
 <!-- This page will allow the user to log in to their account -->
 
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
 <style>
-  input[type=text] {
-    width: 130px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('searchicon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-  }
-
-  input[type=text]:focus {
-    width: 100%;
-  }
-
   /* .rating {
     unicode-bidi: bidi-override;
     direction: rtl;
@@ -50,11 +32,33 @@
 <!-- </head> -->
 <!-- 
 <body> -->
+<!-- <div>
+  <form action="genre-browse" method="post">
+    <h4>Select the Genres you would like to browse:</h4>
+    <input type="radio" name="genre" value="Fantasy"/>Fantasy
+    <input type="radio" name="genre" value="Romance"/>Romance
+    <input type="radio" name="genre" value="Sci-Fi"/>Sci-Fi<br>
+    <input type="radio" name="genre" value="Fiction"/>Fiction
+    <input type="radio" name="genre" value="Non-Fiction"/>Non-Fiction
+    <input type="radio" name="genre" value="Mystery"/>Mystery<br>
+    <input type="submit" value="Browse">
+  </form>
+</div> -->
 
-<form>
-  <input type="text" name="search" placeholder="Search..">
-</form>
 <table style="width:100%">
+  <tr>
+    <th style="width:10%"><H5>Browse By Top Sellers: </H5></th>
+    <th style="width:20%"><a href="{% url 'search:browse-top' %}"><H3>Top Sellers</H3></a></th>
+  </tr>
+  <tr>
+    <th style="width:10%"><H5>Browse By Genre: </H5></th>
+    <th style="width:20%"><a href="{% url 'search:browse-fantasy' %}">Fantasy</a></th>
+    <th style="width:10%"><a href="{% url 'search:browse-fiction' %}">Fiction</a></th>
+    <th style="width:10%"><a href="{% url 'search:browse-nonfiction' %}">Non-Fiction</a></th>
+    <th style="width:10%"><a href="{% url 'search:browse-mystery' %}">Mystery</a></th>
+    <th style="width:10%"><a href="{% url 'search:browse-romance' %}">Romance</a></th>
+    <th style="width:10%"><a href="{% url 'search:browse-scifi' %}">Science-Fiction</a></th>
+  </tr>
   <tr>
     <th style="width:10%">Cover</th>
     <th style="width:20%"><a href="{% url 'search:title' %}">Title</a></th>
