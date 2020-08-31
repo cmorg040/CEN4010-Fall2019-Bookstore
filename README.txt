@@ -5,3 +5,4 @@ Web-based bookstore application with the folowing major features:
 - Book detail views including cover art and links to author bios.
 - Wishlist
 - Database to persistently store book, author, and user data
+- Rating and Commenting on books
